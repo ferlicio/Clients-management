@@ -44,7 +44,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatButtonModule,
@@ -84,7 +83,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     NgxMaskPipe,
   ],
   exports: [
-    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatButtonModule,
