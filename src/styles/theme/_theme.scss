@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+// aqui você pode partir de um prebuilt palette (ex: mat.$blue-palette) 
+// ou gerar totalmente do zero via @angular/material:theme-color
+$primary-palette:   mat.define-palette(mat.$blue-palette,   500, 100, 900);
+$tertiary-palette:  mat.define-palette(mat.$orange-palette, 400, 100, 700);
+
+// “support” não é um token reconhecido — mas gera a paleta mesmo assim:
+$support01-palette: mat.define-palette(mat.$green-palette,  500);
+$support02-palette: mat.define-palette(mat.$cyan-palette,   500);
+$support03-palette: mat.define-palette(mat.$magenta-palette,500);

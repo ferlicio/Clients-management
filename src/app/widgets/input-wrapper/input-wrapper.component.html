@@ -1,0 +1,133 @@
+<ng-container [ngSwitch]="type">
+
+    <!-- TEXT -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'text'">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [type]="'text'"
+            [placeholder]="placeholder" 
+            [value]="value"
+            (input)="handleChange($event)"
+            [required]="required" 
+            [disabled]="disabled"
+            [attr.mask]="maskPattern ? maskPattern : null">
+    </mat-form-field>
+
+    <!-- PASSWORD -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'password'">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [type]="'password'"
+            [placeholder]="placeholder" 
+            [value]="value"
+            (input)="handleChange($event)"
+            [required]="required" 
+            [disabled]="disabled"
+            [attr.mask]="maskPattern ? maskPattern : null">
+        <button
+            mat-icon-button
+            matSuffix
+            (click)="hidden = !hidden"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidden"
+        >
+            <mat-icon>{{hidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <!-- LONG TEXT -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'longText'">
+        <mat-label>{{label}}</mat-label>
+        <textarea matInput type='text' 
+            [placeholder]="placeholder" 
+            [value]="value"
+            (input)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+        </textarea>
+    </mat-form-field>
+
+    <!-- NUMBER -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'number'"
+    [floatLabel]="'auto'">
+        <mat-label>{{label}}</mat-label>
+        <input matInput type="number" class="number" 
+            [placeholder]="placeholder"
+            [value]="value"
+            (input)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+                <span matPrefix *ngIf="type=='price'">$&nbsp;</span>
+                <span matSuffix *ngIf="type=='price'">.00</span>
+    </mat-form-field>
+
+    <!-- PRICE -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'price'"
+    [floatLabel]="'always'">
+        <mat-label>{{label}}</mat-label>
+        <input matInput type="number" class="number" 
+            class="price"
+            [placeholder]="placeholder"
+            [value]="value"
+            (input)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+                <span matPrefix *ngIf="type=='price'">$&nbsp;</span>
+                <span matSuffix *ngIf="type=='price'">.00</span>
+    </mat-form-field>
+
+    <!-- DATE -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'date'">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [matDatepicker]="picker"
+            [value]="value" 
+            (dateChange)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- SELECT -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'select'">
+        <mat-label>{{label}}</mat-label>
+        <mat-select 
+            [value]="value"
+            (selectionChange)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+            <mat-option [value]="opt.value" 
+            *ngFor="let opt of options; trackBy: trackByValue">
+                {{opt.label}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- RADIO -->
+    <span *ngSwitchCase="'radio'" class="formRadio">
+        <label id="radio-group-label">{{label}}</label>
+        <mat-radio-group
+            aria-labelledby="radio-group-label"
+            [value]="value"
+            (change)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled"
+            class="radio-group"
+            >
+            <mat-radio-button class="radio-button" [value]="opt.value" 
+            *ngFor="let opt of options; trackBy: trackByValue">
+                {{opt.label}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </span>
+
+    <!-- CHECKBOX -->
+    <span *ngSwitchCase="'checkbox'" class="formCheckbox">
+        <mat-checkbox color="primary" 
+            [checked]="value"
+            (change)="handleChange($event)"
+            [required]="required"
+            [disabled]="disabled">
+            {{label}}
+        </mat-checkbox>
+    </span>
+
+</ng-container>
