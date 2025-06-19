@@ -1,4 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './_theme-palettes.scss' as palettes;
+@use './_typography.scss' as typo;
+@use '@angular/material' as mat;
+@use './_base-colors.scss';
+
+
+@include typo.apply-typography();
+
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: typo.$font-stack; 
+}
+
+html {
+    color-scheme: light dark;
+    @include mat.theme((
+        color: (
+            primary: palettes.$primary-palette,
+            tertiary:  palettes.$tertiary-palette,
+        ),
+        typography: (
+            plain-family: typo.$font-stack,
+            brand-family: typo.$font-stack,
+            bold-weight:  typo.$weight-bold,
+            medium-weight:  typo.$weight-medium,
+            regular-weight: typo.$weight-regular,
+        ),
+        density: 0
+    ));
+}

@@ -13,8 +13,10 @@ $sidenav-width: 63px;
 
 .app-sidenav {
     width: $sidenav-width;
-    background-color: black;
+    background-color: var(--color-brand-primary-medium);
     float: left;
+    border-radius: 0px 10px 10px 0px;
+    padding: 5px 0px;
 }
 
 .sidenav-content {

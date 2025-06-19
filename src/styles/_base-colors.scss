@@ -1,0 +1,130 @@
+// BRAND COLORS
+$color-brand-primary-darkest: #002C37;
+$color-brand-primary-dark: #0A4A5B;
+$color-brand-primary-medium: #00586F;
+$color-brand-primary-light: #11728B;
+$color-brand-primary-lightest: #7FABB7;
+
+$color-support-02-darkest: #7A6019;
+$color-support-02-dark: #C49A28;
+$color-support-02-medium: #F5C132;
+$color-support-02-light: #F8D36F;
+$color-support-02-lightest: #FBE6AD;
+
+
+
+//  SUPPORT COLORS
+$color-brand-secondary-darkest: #075060;
+$color-brand-secondary-dark: #0B8099;
+$color-brand-secondary-medium: #0EA0C0;
+$color-brand-secondary-light: #56BCD2;
+$color-brand-secondary-lightest: #9ED9E5;
+
+$color-support-02-darkest: #7A6019;
+$color-support-02-dark: #C49A28;
+$color-support-02-medium: #F5C132;
+$color-support-02-light: #F8D36F;
+$color-support-02-lightest: #FBE6AD;
+
+$color-support-03-darkest: #396C29;
+$color-support-03-dark: #5CAC41;
+$color-support-03-medium: #73D852;
+$color-support-03-light: #9DE385;
+$color-support-03-lightest: #C7EFB9;
+
+
+
+// NEUTRAL COLORS
+$color-neutral-darkest: #1A1A1A;
+$color-neutral-dark: #4F4F4F;
+$color-neutral-medium: #9E9E9E;
+$color-neutral-light: #D8D8D8;
+$color-neutral-lightest: #EDEDED;
+$color-neutral-white: #FFFFFF;
+
+
+
+// FEEDBACK COLORS
+$color-feedback-sucess-darkest: #225230;
+$color-feedback-sucess-dark: #337B47;
+$color-feedback-sucess-medium: #44A45F;
+$color-feedback-sucess-light: #8FC89F;
+$color-feedback-sucess-lightest: #DAEDDF;
+
+$color-feedback-warning-darkest: #736A11;
+$color-feedback-warning-dark: #AD9F1A;
+$color-feedback-warning-medium: #E6D422;
+$color-feedback-warning-light: #F0E57A;
+$color-feedback-warning-lightest: #FAF6D3;
+
+$color-feedback-danger-darkest: #730C1F;
+$color-feedback-danger-dark: #AD112F;
+$color-feedback-danger-medium: #E6173E;
+$color-feedback-danger-light: #F0748B;
+$color-feedback-danger-lightest: #FAD1D8;
+
+$color-feedback-info-darkest: #1E536B;
+$color-feedback-info-dark: #2D7DA1;
+$color-feedback-info-medium: #3CA6D6;
+$color-feedback-info-light: #8ACAE6;
+$color-feedback-info-lightest: #D8EDF7;
+
+
+
+
+:root {
+    --color-brand-primary-darkest: #{$color-brand-primary-darkest};
+    --color-brand-primary-dark: #{$color-brand-primary-dark};
+    --color-brand-primary-medium: #{$color-brand-primary-medium};
+    --color-brand-primary-light: #{$color-brand-primary-light};
+    --color-brand-primary-lightest: #{$color-brand-primary-lightest};
+
+    --color-brand-secondary-darkest: #{$color-brand-secondary-darkest};
+    --color-brand-secondary-dark: #{$color-brand-secondary-dark};
+    --color-brand-secondary-medium: #{$color-brand-secondary-medium};
+    --color-brand-secondary-light: #{$color-brand-secondary-light};
+    --color-brand-secondary-lightest: #{$color-brand-secondary-lightest};
+
+    --color-support-02-darkest: #{$color-support-02-darkest};
+    --color-support-02-dark: #{$color-support-02-dark};
+    --color-support-02-medium: #{$color-support-02-medium};
+    --color-support-02-light: #{$color-support-02-light};
+    --color-support-02-lightest: #{$color-support-02-lightest};
+
+    --color-support-03-darkest: #{$color-support-03-darkest};
+    --color-support-03-dark: #{$color-support-03-dark};
+    --color-support-03-medium: #{$color-support-03-medium};
+    --color-support-03-light: #{$color-support-03-light};
+    --color-support-03-lightest: #{$color-support-03-lightest};
+
+    --color-neutral-darkest: #{$color-neutral-darkest};
+    --color-neutral-dark: #{$color-neutral-dark};
+    --color-neutral-medium: #{$color-neutral-medium};
+    --color-neutral-light: #{$color-neutral-light};
+    --color-neutral-lightest: #{$color-neutral-lightest};
+    --color-neutral-white: #{$color-neutral-white};
+
+    --color-feedback-sucess-darkest: #{$color-feedback-sucess-darkest};
+    --color-feedback-sucess-dark: #{$color-feedback-sucess-dark};
+    --color-feedback-sucess-medium: #{$color-feedback-sucess-medium};
+    --color-feedback-sucess-light: #{$color-feedback-sucess-light};
+    --color-feedback-sucess-lightest: #{$color-feedback-sucess-lightest};
+
+    --color-feedback-warning-darkest: #{$color-feedback-warning-darkest};
+    --color-feedback-warning-dark: #{$color-feedback-warning-dark};
+    --color-feedback-warning-medium: #{$color-feedback-warning-medium};
+    --color-feedback-warning-light: #{$color-feedback-warning-light};
+    --color-feedback-warning-lightest: #{$color-feedback-warning-lightest};
+
+    --color-feedback-danger-darkest: #{$color-feedback-danger-darkest};
+    --color-feedback-danger-dark: #{$color-feedback-danger-dark};
+    --color-feedback-danger-medium: #{$color-feedback-danger-medium};
+    --color-feedback-danger-light: #{$color-feedback-danger-light};
+    --color-feedback-danger-lightest: #{$color-feedback-danger-lightest};
+
+    --color-feedback-info-darkest: #{$color-feedback-info-darkest};
+    --color-feedback-info-dark: #{$color-feedback-info-dark};
+    --color-feedback-info-medium: #{$color-feedback-info-medium};
+    --color-feedback-info-light: #{$color-feedback-info-light};
+    --color-feedback-info-lightest: #{$color-feedback-info-lightest};
+}

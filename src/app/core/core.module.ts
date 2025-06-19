@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 
@@ -13,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
     LayoutComponent,
     FooterComponent,
     HeaderComponent,
+    SidenavComponent,
   ],
   imports: [
     CommonModule,

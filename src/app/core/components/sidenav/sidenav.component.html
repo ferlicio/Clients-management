@@ -1,0 +1,14 @@
+<nav>
+    <ul>
+        <li><a routerLink="/"><mat-icon>menu</mat-icon></a></li>
+
+        <li>
+            <div [ngClass]="{'active': activeURL == '/clients'}"></div>
+            <a routerLink="/"><mat-icon>home</mat-icon></a>
+        </li>
+        <li>
+            <div [ngClass]="{'active': activeURL == '/clients/new'}"></div>
+            <a routerLink="/"><mat-icon>face</mat-icon></a>
+        </li>
+    </ul>
+</nav>

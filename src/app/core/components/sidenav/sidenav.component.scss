@@ -1,0 +1,33 @@
+a {
+    color: var(--color-neutral-white);
+
+    :hover {
+        color: var(--color-support-02-light);
+    }
+}
+
+nav > ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    padding: 0px;
+
+    li {
+        border-color: var(--color-secondary-medium);
+        list-style: none;
+
+        a {
+            font-size: 24px;
+        }
+    }
+}
+
+div.active {
+    position: absolute;
+    left: 0px;
+    background: var(--color-brand-secondary-medium);
+    width: 4px;
+    height: 25px;
+    border-radius: 0px 3px 3px 0px;
+}

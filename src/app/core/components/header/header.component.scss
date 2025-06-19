@@ -1,5 +1,9 @@
 :host {
-    background-color: rgb(138, 48, 48);
+    background-color: var(--color-neutral-white);
+}
+
+.header__title {
+    color: var(--color-brand-primary-dark);
 }
 
 div.header-container {
@@ -9,7 +13,7 @@ div.header-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 64px;
+        height: 60px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
         nav > ul {
