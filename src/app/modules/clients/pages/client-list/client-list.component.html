@@ -1,1 +1,27 @@
-<p>client-list works!</p>
+<section *ngIf="clientsList$ | async as listaClientes" class="listarClientes">
+
+    <div class="header">
+        <h1>Lista de Clientes</h1>
+        <!-- <app-input-wrapper formControlName="nome"
+            placeholder='Nome do usuário'
+            label='Nome' 
+        ></app-input-wrapper> -->
+    </div>
+
+    <app-table [data]="listaClientes.data"
+        (editFunction)="this.router.navigate(['clients', $event, 'edit'])"
+        (deleteFunction)="deleteUser($event)"
+        (sortEvent)="sortColumn($event)"
+        [sortable]="true">
+    </app-table>
+
+
+    <mat-paginator #paginator
+                   (page)="handlePageEvent($event)"
+                   [length]="listaClientes.totalCount"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[10,20,30]"
+                   [pageIndex]="pageIndex"
+                   showFirstLastButtons>
+    </mat-paginator>
+</section>

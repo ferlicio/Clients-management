@@ -2,6 +2,16 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
 
+## Instalation
+
+To install the project dependencies, run:
+
+```bash
+npm install @angular/cli@19.2.5
+npm install -g json-server@0.17.4
+npm install
+```
+
 ## Development server
 
 To start a local development server, run:

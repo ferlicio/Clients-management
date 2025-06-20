@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content>
-<p>{{data.message}}</p>
+<p [innerHTML]="data.message"></p>
 </mat-dialog-content>
 
 <div mat-dialog-actions style="justify-content: end;" *ngIf="data.type==undefined">
@@ -8,6 +8,6 @@
 </div>
 
 <div mat-dialog-actions style="justify-content: space-between;" *ngIf="data.type=='boolean'">
-    <button mat-stroked-button color="warn" mat-dialog-close>Cancelar</button>
-    <button mat-stroked-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Confirmar</button>
+    <button mat-stroked-button color="warn" mat-dialog-close>{{data.buttons ?data.buttons[0] :"Cancelar"}}</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>{{data.buttons ?data.buttons[1] :"Confirmar"}}</button>
 </div>

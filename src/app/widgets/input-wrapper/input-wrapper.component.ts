@@ -6,8 +6,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 type FieldType = "text" | "longText" | "number" | "select" | "date" | "radio" | "checkbox" | "password" | "price"; //adicionar date-range
 
 interface Option {
-  label?: string;    // Texto a ser exibido (opcional)
-  value: any;       // Valor associado à opção
+  label?: string;  
+  value: any;
 }
 
 export const DATE_FORMAT = {

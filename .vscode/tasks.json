@@ -53,7 +53,7 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": "JSON Server started",
-          "endsPattern": "Watching (.*)..."
+          "endsPattern": "Watching..."
         }
       },
       "args": [

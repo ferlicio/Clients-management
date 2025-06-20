@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Client } from '../../shared/models/client';
+import { map, Observable } from 'rxjs';
+import { Client, ClientListResponse } from '../../shared/models/client';
+import { Sorting } from '../../shared/components/table/table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,22 @@ export class ClientService {
   constructor(private http: HttpClient) {}
 
 
-  getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseUrl);
+  getClientsList(pageSize:number = 10, pageIndex:number = 1, sorting:Sorting|null): Observable<ClientListResponse> {
+    const url = `${this.baseUrl}?_limit=${pageSize}&_page=${pageIndex}`;
+    const sortParam = sorting ? `&_sort=${sorting.prop}&_order=${sorting.direction}` : '';
+    const finalUrl = `${url}${sortParam}`;
+    return this.http.get<Client[]>(finalUrl, {observe: 'response'}).pipe(
+      map((response: HttpResponse<Client[]>) => {
+        const data = response.body || [];
+        const totalCountHeader = response.headers.get('X-Total-Count');
+        const totalCount = totalCountHeader ? parseInt(totalCountHeader, 10) : data.length;
+
+        return { data, totalCount };
+      })
+    );
   }
 
-  getClientById(id: number): Observable<Client> {
+  getClientById(id: string): Observable<Client> {
     return this.http.get<Client>(`${this.baseUrl}/${id}`);
   }
 
@@ -39,7 +51,7 @@ export class ClientService {
     );
   }
 
-  deleteClient(id: number): Observable<void> {
+  deleteClient(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

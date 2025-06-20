@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ClientService } from '../../../../core/services/client.service';
-import { debounceTime, filter, Observable, startWith, Subject, Subscription, takeUntil } from 'rxjs';
-import { Client } from '../../../../shared/models/client';
+import { filter, startWith, Subject, Subscription, takeUntil } from 'rxjs';
+import { Client, ClientToCreate } from '../../../../shared/models/client';
 import { DialogComponent } from '../../../../shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataValidationService } from '../../../../core/services/data-validation.service';
@@ -19,6 +19,7 @@ export class ClientDetailComponent implements OnInit {
   isEditing!: boolean;
   clientForm: FormGroup;
   currentUrl: string = '';
+  currentClientId?: string;
   clientFormSubscription?: Subscription;
   private unsubscribe$ = new Subject<void>();
 
@@ -30,10 +31,8 @@ export class ClientDetailComponent implements OnInit {
       private dataValidationService: DataValidationService,
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
-      private cdr: ChangeDetectorRef
     ) {
       this.clientForm = this.fb.group({
-        id: ['autogerado'], // autogerado
         nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
         cpf: ['', Validators.required],
         dataNascimento: ['', Validators.required],
@@ -51,13 +50,12 @@ export class ClientDetailComponent implements OnInit {
       takeUntil(this.unsubscribe$),
       startWith(this.router.url)
     ).subscribe(() => {
-      const idParam = this.activatedRoute.snapshot.paramMap.get('id');
-      const clientId = idParam ? parseInt(idParam) : NaN;
+      this.currentClientId = this.activatedRoute.snapshot.paramMap.get('id')?? undefined;
 
       this.currentUrl = this.router.url;
-      this.hasClient = !isNaN(clientId) && !this.currentUrl.includes('new');
+      this.hasClient = this.currentClientId != undefined && !this.currentUrl.includes('new');
       this.isEditing = this.currentUrl.includes('edit');
-      this.initializeFormBasedOnRoute(clientId);
+      this.initializeFormBasedOnRoute(this.currentClientId);
     });
 
     /* this.clientForm.valueChanges.pipe(
@@ -68,21 +66,19 @@ export class ClientDetailComponent implements OnInit {
       }); */
   }
 
-  initializeFormBasedOnRoute(clientId?:number): void {
+  initializeFormBasedOnRoute(clientId?:string): void {
     this.clientForm.reset({
-      id: 'autogerado',
       rendaMensal: 0
     });
     this.clientForm.enable();
 
-    if (this.hasClient && clientId && !isNaN(clientId)) { //se o usuário já existe e o ID é válido
+    if (this.hasClient && clientId) { //se o usuário já existe e o ID é válido
       this.clientService.getClientById(clientId)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (cliente: Client) => {
             this.clientForm.patchValue(cliente);
             if (this.isEditing) { // se está editando, habilita o formulário
-              this.clientForm.controls['id'].disable();
               this.clientForm.controls['dataCadastro'].disable();
               this.clientForm.controls['cpf'].disable();
               this.setValueChanges();
@@ -104,7 +100,6 @@ export class ClientDetailComponent implements OnInit {
       });
       this.isEditing = false;
       this.hasClient = false;
-      this.clientForm.controls['id'].disable();
       this.clientForm.controls['dataCadastro'].disable();
       this.router.navigate(['/clients/new']);
     }
@@ -121,39 +116,24 @@ export class ClientDetailComponent implements OnInit {
 
   submitUser(finished: boolean = false) {
     if (this.clientForm.invalid) {
+      return;
+    }
 
-      let error = ''
-      switch (true) {
-        case (this.clientForm.get('nome')?.value as string).split(' ').length < 2:
-          error = 'É necessário informar o nome completo do cliente.';
-          break;
-        case this.dataValidationService.validateCPF(this.clientForm.get('cpf')?.value as string) === false:
-          error = 'CPF inválido. Por favor, verifique o número informado.';
-          break;
-        case (this.clientForm.get('dataNascimento')?.value as Date).getFullYear() > new Date().getFullYear() - 18:
-          error = 'O cliente deve ter pelo menos 18 anos.';
-          break;
-        case (this.clientForm.get('dataNascimento')?.value as Date).getFullYear() < new Date().getFullYear() + 60:
-          error =  'O cliente não pode ter mais de 60 anos.';
-          break;
-        default:
-          error = this.clientForm.errors ? Object.values(this.clientForm.errors).join(', ') : 'Erro de validação desconhecido.';
-          break;
-      }
+    let errors = this.validateFields();
 
+    if (errors.length >= 1) {
       this.dialog.open(DialogComponent, {
-      data: {title: `Erro de validação`, message: error}
+      data: {title: `Erro de validação`, message: errors.join('<br/>')}
       });
       return;
     }
     console.log('Salvando...')
     console.log(this.clientForm.getRawValue())
-    const clienteData = this.clientForm.getRawValue() as Client;
+    const clienteData = this.clientForm.getRawValue() as ClientToCreate;
     const userid = this.activatedRoute.snapshot.paramMap.get('id');
-    clienteData.id = clienteData.id === 'autogerado' ? 'autogenerated' : userid!;
 
     if (this.isEditing) {
-      if (!clienteData.id || clienteData.id === 'autogenerated') {
+      if (!this.currentClientId || this.currentClientId!) {
         this.dialog.open(DialogComponent, {
           data: {title: `Erro`, message: `ID do cliente ausente ou inválido para edição.`}
         })
@@ -190,6 +170,32 @@ export class ClientDetailComponent implements OnInit {
     }
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  validateFields(): string[] {
+    const errors: string[] = [];
+    const today = new Date();
+
+    if ((this.clientForm.get('nome')?.value as string).split(' ').length < 2)
+      errors.push('É necessário informar o nome completo do cliente.');
+
+    if (this.dataValidationService.validateCPF(this.clientForm.get('cpf')?.value as string) === false)
+      errors.push('CPF inválido. Por favor, verifique o número informado.');
+
+    if ((new Date(this.clientForm.get('dataNascimento')?.value)) > new Date(
+      today.getFullYear() - 18, today.getMonth(), today.getDate()
+    ))
+      errors.push('O cliente deve ter pelo menos 18 anos.');
+
+    if ((new Date(this.clientForm.get('dataNascimento')?.value)) < new Date(
+      today.getFullYear() - 60, today.getMonth(), today.getDate()
+    ))
+      errors.push('O cliente não pode ter mais de 60 anos.');
+
+    if (this.clientForm.errors) 
+      errors.push(Object.values(this.clientForm.errors).join(', '));
+
+    return errors;
   }
 
   goBack() {
