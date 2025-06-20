@@ -1,0 +1,83 @@
+{
+  "clients": [
+    {
+      "nome": "João Silva",
+      "dataNascimento": "1985-05-15T00:00:00.000Z",
+      "rendaMensal": "3500.77",
+      "email": "joao.silva@example.com",
+      "id": "1",
+      "dataCadastro": "2025-06-20T03:28:56.535Z",
+      "cpf": "000.000.000-00"
+    },
+    {
+      "id": "2",
+      "nome": "Maria Oliveira",
+      "cpf": "987.654.321-11",
+      "dataNascimento": "1992-11-22T00:00:00.000Z",
+      "rendaMensal": 5200,
+      "email": "maria.o@example.com",
+      "dataCadastro": "2023-02-20T14:45:00.000Z"
+    },
+    {
+      "id": "3",
+      "nome": "Pedro Santos",
+      "cpf": "111.222.333-44",
+      "dataNascimento": "1978-03-01T00:00:00.000Z",
+      "rendaMensal": 8100.5,
+      "email": "pedro.santos@example.com",
+      "dataCadastro": "2023-03-05T09:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "nome": "Ana Costa",
+      "cpf": "555.666.777-88",
+      "dataNascimento": "2000-07-30T00:00:00.000Z",
+      "rendaMensal": 2800,
+      "email": "ana.costa@example.com",
+      "dataCadastro": "2023-04-12T11:15:00.000Z"
+    },
+    {
+      "id": "5",
+      "nome": "Carlos Souza",
+      "cpf": "777.888.999-00",
+      "dataNascimento": "1965-01-01T00:00:00.000Z",
+      "rendaMensal": 12000,
+      "email": "carlos.souza@example.com",
+      "dataCadastro": "2023-05-01T16:00:00.000Z"
+    },
+    {
+      "id": "9b30",
+      "nome": "João Silva",
+      "dataNascimento": "1985-05-15T00:00:00.000Z",
+      "rendaMensal": 3500.75,
+      "email": "joao.silva@example.com"
+    },
+    {
+      "id": "1",
+      "nome": "João Silva",
+      "cpf": null,
+      "dataNascimento": "1985-05-15T00:00:00.000Z",
+      "rendaMensal": 3500.75,
+      "email": "joao.silva@example.com",
+      "dataCadastro": null
+    },
+    {
+      "id": "1",
+      "nome": "João Silva",
+      "cpf": null,
+      "dataNascimento": "1985-05-15T00:00:00.000Z",
+      "rendaMensal": 3500.75,
+      "email": "joao.silva@example.com",
+      "dataCadastro": null
+    },
+    {
+      "id": "1",
+      "nome": "João Silva",
+      "cpf": "000.000.000-00",
+      "dataNascimento": "1985-05-15T00:00:00.000Z",
+      "rendaMensal": 3500.75,
+      "email": "joao.silva@example.com",
+      "dataCadastro": "2025-06-20T03:28:56.535Z"
+    }
+  ]
+}

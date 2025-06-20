@@ -37,6 +37,47 @@
           }
         }
       }
+    },
+    {
+      "label": "Start JSON Server",
+      "type": "shell",
+      "command": "json-server",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "json-server",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^.*$",
+          "message": 0
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "JSON Server started",
+          "endsPattern": "Watching (.*)..."
+        }
+      },
+      "args": [
+        "--watch",
+        "db.json",
+        "--port",
+        "3000"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Start Server and Angular",
+      "dependsOn": ["Start JSON Server","npm: start"],
+      "dependsOrder": "parallel",
+      "presentation": {
+        "reveal": "always"
+      }
     }
   ]
 }

@@ -12,6 +12,9 @@ import { InputWrapperComponent } from './input-wrapper/input-wrapper.component';
   imports: [
     CommonModule,
     SharedModule
+  ], 
+  exports: [
+    InputWrapperComponent
   ]
 })
 export class WidgetsModule { }

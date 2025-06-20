@@ -1,8 +1,9 @@
 export interface Client {
+    id?: string;
     nome: string;
     cpf: string;
-    dataNascimento: Date;
+    dataNascimento: string;
     rendaMensal: number;
     email: string;
-    dataCadastro: Date;
+    dataCadastro: string;
 }

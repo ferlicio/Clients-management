@@ -1,1 +1,41 @@
-<p>client-detail works!</p>
+<form [formGroup]="clientForm" (ngSubmit)="submitUser(true)">
+    <app-input-wrapper formControlName="nome"
+    placeholder='Nome do usuário'
+        label='Nome' 
+        ></app-input-wrapper>
+    <app-input-wrapper formControlName="cpf" 
+        maskPattern="00.000.000-00 || 000.000.000-00" 
+        label='CPF' 
+    ></app-input-wrapper>
+    <app-input-wrapper formControlName="dataNascimento"
+        placeholder='Data de Nascimento' 
+        label='Data de Nascimento' 
+        type="date"
+    ></app-input-wrapper>
+    <app-input-wrapper formControlName="rendaMensal" 
+        label='Renda Mensal' 
+        type="number"   
+    ></app-input-wrapper>
+    <app-input-wrapper 
+        formControlName="email" 
+        label='Email'
+        maskPattern="A*@A*.A*"
+    ></app-input-wrapper>
+    <app-input-wrapper formControlName="dataCadastro"
+        placeholder='Data de Cadastro' 
+        label='Data de Cadastro' 
+        type="date"
+    ></app-input-wrapper>
+
+    <app-button 
+        type="button"
+        [label]="'Voltar'"
+        (click)="goBack()">
+    </app-button>
+    <app-button 
+        type="submit"
+        [disabled]="!clientForm.valid"
+        [label]="hasClient ? 'Atualizar' : 'Cadastrar'">
+    </app-button>
+</form>
+

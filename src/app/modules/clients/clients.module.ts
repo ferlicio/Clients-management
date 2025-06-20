@@ -7,6 +7,7 @@ import { ClientListComponent } from './pages/client-list/client-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsModule } from '../../widgets/widgets.module';
 import { CoreModule } from '../../core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -6,11 +8,25 @@ import { Component } from '@angular/core';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent {
-  activeURL: string;
+export class SidenavComponent implements OnInit, OnDestroy {
+  activeURL: string = '';
+  private unsubscribe$ = new Subject<void>();
 
-  constructor() {
-    this.activeURL = window.location.pathname;
-    console.log(this.activeURL);
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.activeURL = this.router.url;
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((event: NavigationEnd) => {
+      this.activeURL = event.urlAfterRedirects;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
