@@ -17,10 +17,11 @@ export class ClientService {
   constructor(private http: HttpClient) {}
 
 
-  getClientsList(pageSize:number = 10, pageIndex:number = 1, sorting:Sorting|null): Observable<ClientListResponse> {
+  getClientsList(pageSize:number = 10, pageIndex:number = 1, sorting:Sorting|null, filter:{termo:string, prop:string}): Observable<ClientListResponse> {
     const url = `${this.baseUrl}?_limit=${pageSize}&_page=${pageIndex}`;
     const sortParam = sorting ? `&_sort=${sorting.prop}&_order=${sorting.direction}` : '';
-    const finalUrl = `${url}${sortParam}`;
+    const filterTerm = filter.termo ? `&${filter.prop}_like=${filter.termo}` : '';
+    const finalUrl = `${url}${sortParam}${filterTerm}`;
     return this.http.get<Client[]>(finalUrl, {observe: 'response'}).pipe(
       map((response: HttpResponse<Client[]>) => {
         const data = response.body || [];

@@ -21,20 +21,13 @@ export class TableComponent {
   @Input() hasDelete = true;
   @Input() hasView = true;
   @Input() sortable = true;
+  @Input() appliedSort: Sorting | null = null;
   @Output() sortEvent = new EventEmitter<Sorting|null>();
   @Output() editFunction = new EventEmitter<string>();
   @Output() deleteFunction = new EventEmitter<string>();
 
-  appliedSort: Sorting | null = null;
 
-  @Input() columns:
-    {name: string, prop: keyof Client}[]
-  = [
-    {name:'Nome Cliente', prop: 'nome'},
-    {name:'CPF', prop: 'cpf'},
-    {name:'Data Cadastro', prop: 'dataCadastro'},
-    {name:'Renda Mensal', prop: 'rendaMensal'},
-  ];
+  @Input() columns!: {name: string, prop: keyof Client}[]
   @Input() data: Client[] = [
     {
       id: '1',
@@ -78,7 +71,7 @@ export class TableComponent {
         this.appliedSort = null;
       }
     } else {
-      const newDirection = currentSort?.prop === column && currentSort.direction === 'asc' ? 'desc' : 'asc';
+      const newDirection = currentSort?.prop === column && currentSort.direction === 'desc' ? 'asc' : 'desc';
       this.appliedSort = { prop: column as keyof Client, direction: newDirection };
     }
     

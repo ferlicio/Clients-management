@@ -1,0 +1,17 @@
+form.filterForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    /* >app-button {
+        margin-left: 10px;
+    } */
+    
+    >app-input-wrapper {
+        padding: 0px 5px;
+        flex: 1;
+        >mat-form-field {
+            width: 100%;
+        }
+    }
+}

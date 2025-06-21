@@ -1,3 +1,7 @@
+<h2>
+    {{ hasClient ? 'Editar Cliente' : 'Cadastrar Cliente' }}
+</h2>
+
 <form [formGroup]="clientForm" (ngSubmit)="submitUser(true)">
     <app-input-wrapper formControlName="nome"
     placeholder='Nome do usuário'
@@ -27,15 +31,17 @@
         type="date"
     ></app-input-wrapper>
 
-    <app-button 
-        type="button"
-        [label]="'Voltar'"
-        (click)="goBack()">
-    </app-button>
-    <app-button 
-        type="submit"
-        [disabled]="!clientForm.valid"
-        [label]="hasClient ? 'Atualizar' : 'Cadastrar'">
-    </app-button>
+    <div class="actions">
+        <app-button 
+            type="button"
+            [label]="'Voltar'"
+            (click)="goBack()">
+        </app-button>
+        <app-button 
+            type="submit"
+            [disabled]="!clientForm.valid"
+            [label]="hasClient ? 'Atualizar' : 'Cadastrar'">
+        </app-button>
+    </div>
 </form>
 

@@ -1,20 +1,34 @@
+<div class="header">
+    <h2>Lista de Clientes</h2>
+    <form [formGroup]="filterForm" (submit)="loadClients()" 
+    (keyup.enter)="loadClients()" class="filterForm">
+        <app-input-wrapper formControlName="termo"
+            label='Pesquisar...'>
+        </app-input-wrapper>
+        <app-input-wrapper formControlName="prop"
+            type="select" label="Propriedade"
+            [options]="selectList">
+        </app-input-wrapper>
+        <app-button type="submit"
+            [label]="'Pesquisar'"
+            [disabled]="!filterForm.valid">
+        </app-button>
+        <app-button type="button"
+            [label]="'Limpar'"
+            (click)="resetFilter()">
+        </app-button>
+    </form>
+</div>
+
 <section *ngIf="clientsList$ | async as listaClientes" class="listarClientes">
-
-    <div class="header">
-        <h1>Lista de Clientes</h1>
-        <!-- <app-input-wrapper formControlName="nome"
-            placeholder='Nome do usuário'
-            label='Nome' 
-        ></app-input-wrapper> -->
-    </div>
-
     <app-table [data]="listaClientes.data"
         (editFunction)="this.router.navigate(['clients', $event, 'edit'])"
         (deleteFunction)="deleteUser($event)"
         (sortEvent)="sortColumn($event)"
-        [sortable]="true">
+        [appliedSort]="currentSort"
+        [sortable]="true"
+        [columns]="colunas">
     </app-table>
-
 
     <mat-paginator #paginator
                    (page)="handlePageEvent($event)"

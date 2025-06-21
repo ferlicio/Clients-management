@@ -44,7 +44,8 @@ export const DATE_FORMAT = {
 })
 export class InputWrapperComponent implements ControlValueAccessor {
   @Input() label: string = "No Label";
-  @Input() floatLabel: 'auto' | 'always' | 'never' = 'auto';                     
+  @Input() floatLabel: 'auto' | 'always' | 'never' = 'auto'; 
+  @Input() appearance: string = '';                    
   @Input() type: FieldType = "text";                                        
   @Input() placeholder: string = '';         
   @Input() maskPattern: string = '';              
